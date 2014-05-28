@@ -1,6 +1,58 @@
 !!! 5
 %html
   %head
-    %title Hello!
+    %title OneSignature.org
+    %link{ rel: 'stylesheet', href: '/stylesheets/bootstrap.min.css' }
+    :css
+      body {
+        background-color: #d9d9d9;
+      }
+      .header {
+         margin: 1em 0 2em;
+      }
+      .logo-one, .logo-dotorg {
+        font-size: 1.5em;
+        font-weight: lighter;
+        font-variant: small-caps;
+        letter-spacing: 3px;
+      }
+      .logo-signature {
+        font-size: 2em;
+        font-family: cursive;
+        font-variant: normal;
+        letter-spacing: normal;
+      }
+      .homepage-petition {
+        margin-bottom: 5em;
+      }
+      .header-create-petition {
+        font-variant: small-caps;
+        float: right;
+      }
+      .homepage-petition-image {
+        float: left;
+        margin: 0 1em 1em 0;
+      }
+      .homepage-petition-title {
+        font-size: 48px;
+        font-variant: small-caps;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+      .homepage-petition-description {
+      }
   %body
-    = yield
+    .container
+      %header.header.row
+        .col-xs-6
+          .logo
+            %span.logo-one> One
+            %span.logo-signature> Signature
+            %span.logo-dotorg> .org
+        .col-xs-6
+          %a.header-create-petition{ href: '#' }
+            Create a Petition
+
+      .row
+        .col-xs-12
+          = yield
