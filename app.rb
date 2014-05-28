@@ -1,3 +1,4 @@
+require 'sinatra'
 require_relative 'environment.rb'
 
 configure do
@@ -5,5 +6,6 @@ configure do
 end
 
 get '/' do
-  haml :index
+  petitions = Petition.all
+  haml :index, locals: { petitions: petitions }
 end
