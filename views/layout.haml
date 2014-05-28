@@ -29,9 +29,30 @@
         font-variant: small-caps;
         float: right;
       }
+
+      /* mobile displays a "petition card" instead of the separate things */
+      .homepage-petition-card {
+        min-height: 300px;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
+      }
+
+      .homepage-petition-card .homepage-petition-title {
+        background-color: rgba(255, 255, 255, .5);
+        width: 100%;
+      }
+
+      .homepage-petition-card .homepage-petition-description {
+        background-color: rgba(255, 255, 255, .5);
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 0;
+        padding: 1em;
+      }
+
       .homepage-petition-image {
-        float: left;
-        margin: 0 1em 1em 0;
+        margin-bottom: 2em;
       }
       .homepage-petition-title {
         font-size: 48px;
