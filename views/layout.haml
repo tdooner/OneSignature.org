@@ -6,20 +6,28 @@
     %link{ href: 'http://fonts.googleapis.com/css?family=Homemade+Apple', rel: 'stylesheet', type: 'text/css'}
     :css
       body {
-        background-color: #d9d9d9;
+        background-color: #fff;
       }
+
       .header {
-         margin: 1em 0 2em;
+         padding: 1em 0;
       }
+
+      .header-container-full-bleed {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+
       .logo a {
         color: #000;
       }
+
       .logo-one, .logo-dotorg {
         font-size: 1.5em;
         font-weight: lighter;
         font-variant: small-caps;
         letter-spacing: 3px;
       }
+
       .logo-signature {
         font-size: 1.8em;
         font-family: 'Homemade Apple', cursive;
@@ -27,9 +35,11 @@
         letter-spacing: normal;
         margin-left: 10px;
       }
+
       .homepage-petition {
         margin-bottom: 5em;
       }
+
       .header-create-petition {
         font-variant: small-caps;
         float: right;
@@ -59,6 +69,7 @@
       .homepage-petition-image {
         margin-bottom: 2em;
       }
+
       .homepage-petition-title {
         font-size: 48px;
         font-variant: small-caps;
@@ -69,24 +80,55 @@
       }
 
       /* petition show page */
-      .petition-card {
-        margin-bottom: 2em;
-        width: 33%;
-        float: left;
+      .petition-header-full-bleed {
+        min-height: 400px;
+        background-size: cover;
+        background-position: center center;
+        position: relative;
       }
-  %body
-    .container
-      %header.header.row
-        .col-xs-6
-          .logo
-            %a{ href: '/' }
-              %span.logo-one> One
-              %span.logo-signature> Signature
-              %span.logo-dotorg> .org
-        .col-xs-6
-          %a.header-create-petition{ href: '/new' }
-            Create a Petition
 
-      .row
-        .col-xs-12
-          = yield
+      .petition-header-title {
+        position: absolute;
+        bottom: 1em;
+      }
+
+      .petition-header-title h1 {
+        background-color: #000;
+        padding: 7px 15px;
+        line-height: 1.2em;
+        color: #FFF;
+      }
+
+  %body
+    - header = capture_haml do
+      .container
+        %header.header.row
+          .col-xs-6
+            .logo
+              %a{ href: '/' }
+                %span.logo-one> One
+                %span.logo-signature> Signature
+                %span.logo-dotorg> .org
+          .col-xs-6
+            %a.header-create-petition{ href: '/new' }
+              %i.glyphicon.glyphicon-plus
+              Create a Petition
+
+    - body = capture_haml do
+      .container
+        .row
+          .col-xs-12
+            = yield
+
+    - if defined? petition
+      .petition-header-full-bleed{ style: "background-image: url(#{petition.cover_photo.url});" }
+        .header-container-full-bleed
+          = header
+        .container
+          .row.petition-header-title
+            .col-sm-10.col-sm-offset-2
+              %h1= petition.title
+      = body
+    - else
+      = header
+      = body

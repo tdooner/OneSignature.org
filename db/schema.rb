@@ -18,4 +18,10 @@ ActiveRecord::Schema.define do
     t.string :target
     t.text :description
   end
+
+  create_table :photos do |t|
+    t.integer :petition_id
+    t.string :url
+    t.boolean :cover, default: false
+  end
 end

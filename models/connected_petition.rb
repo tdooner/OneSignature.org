@@ -2,6 +2,8 @@ require 'open-uri'
 require 'nokogiri'
 
 class ConnectedPetition < ActiveRecord::Base
+  belongs_to :petition
+
   before_save :get_info!, on: :create
 
   def get_info!
@@ -14,6 +16,9 @@ class ConnectedPetition::Causes < ConnectedPetition
     self.url = URI(url).tap { |u| u.query = nil }.to_s
 
     doc = Nokogiri::HTML(open(url))
+
+    photo = doc.css('meta[property="og:image"]').first['content']
+    self.petition.photos << Photo.new(url: photo) if photo
 
     self.title = doc.css('.campaign-title a').text
     self.target = doc.css('.action-target').text
@@ -33,18 +38,18 @@ class ConnectedPetition::Change < ConnectedPetition
     api_uri = URI('https://api.change.org/v1/petitions/' + petition_id)
     api_uri.query = URI.encode_www_form(api_key: ENV['CHANGE_API_KEY'])
 
-    petition = JSON.parse(open(api_uri).read)
-    self.title = petition["title"]
-    self.target = petition["targets"].first["name"]
-    self.description = Nokogiri::HTML.parse(petition["overview"]).text
+    p = JSON.parse(open(api_uri).read)
+    self.petition.photos << Photo.new(url: p["image_url"])
+
+    self.title = p["title"]
+    self.target = p["targets"].first["name"]
+    self.description = Nokogiri::HTML.parse(p["overview"]).text
   end
 end
 
 class ConnectedPetition::WeThePeople < ConnectedPetition
   # TODO: Complete this when the WH.gov API comes back online.
   def get_info!
-    url = 'https://petitions.whitehouse.gov/petition/end-current-policy-censoring-free-speech-discussing-radical-islam/wJwGTVsc'
-
     api_uri = URI('http://api.whitehouse.gov/v1/petitions.json')
     api_uri.query = URI.encode_www_form(url: url)
 
