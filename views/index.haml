@@ -2,10 +2,12 @@
   .homepage-petition
     .hidden-sm.hidden-md.hidden-lg
       .homepage-petition-card{ style: "background-image: url(/adelbert.png);" }
-        %p.homepage-petition-title= p.title
+        %a{ href: url("/petitions/#{p.id}") }
+          %p.homepage-petition-title= p.title
         %p.homepage-petition-description= p.description
     .hidden-xs
       .row
         %img.col-xs-2.col-sm-3.homepage-petition-image{ src: '/adelbert.png' }
-        %p.col-xs-10.col-sm-9.homepage-petition-title= p.title
+        %a{ href: url("/petitions/#{p.id}") }
+          %p.col-xs-10.col-sm-9.homepage-petition-title= p.title
         %p.homepage-petition-description= p.description

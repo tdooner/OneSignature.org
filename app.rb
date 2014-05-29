@@ -40,3 +40,8 @@ get '/' do
   petitions = Petition.all
   haml :index, locals: { petitions: petitions }
 end
+
+get '/petitions/:id' do
+  petition = Petition.find(params[:id])
+  haml :petition, locals: { petition: petition }
+end
