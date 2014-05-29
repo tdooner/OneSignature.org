@@ -67,7 +67,7 @@ post '/new' do
   ConnectedPetition::Change.create(petition_id: p.id, url: params[:change_url])
   ConnectedPetition::WeThePeople.create(petition_id: p.id, url: params[:whitehouse_url])
 
-  redirect '/'
+  redirect '/petitions/' + p.id.to_s
 end
 
 # Sign a petition action

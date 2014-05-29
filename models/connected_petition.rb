@@ -45,9 +45,13 @@ class ConnectedPetition::WeThePeople < ConnectedPetition
   def get_info!
     url = 'https://petitions.whitehouse.gov/petition/end-current-policy-censoring-free-speech-discussing-radical-islam/wJwGTVsc'
 
-    api_uri = URI('http://11111011100.api.whitehouse.gov/v1/petitions.json')
+    api_uri = URI('http://api.whitehouse.gov/v1/petitions.json')
     api_uri.query = URI.encode_www_form(url: url)
 
-    JSON.parse(open(api_uri).read)
+    petition = JSON.parse(open(api_uri).read)["results"].first
+
+    self.title = petition["title"]
+    self.target = "the Obama Administration"
+    self.description = petition["body"]
   end
 end

@@ -1,5 +1,11 @@
 .petition
   %h2= petition.title
-  %p= petition.description
-  %form{ method: 'POST', action: url("/petitions/#{petition.id}/sign")}
-    %button.btn.btn-primary{ type: :submit } Sign the Petition
+  - petition.connected_petitions.each do |p|
+    %section.petition-card
+      Petition to
+      %i #{p.target}
+      %p
+        %strong= p.title
+      %p= p.description
+    %form{ method: 'POST', action: url("/petitions/#{petition.id}/sign")}
+      %button.btn.btn-primary{ type: :submit } Sign the Petition
