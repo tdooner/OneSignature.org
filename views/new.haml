@@ -1,0 +1,23 @@
+%form.form{ action: '/new', method: 'POST' }
+  .form-group
+    %label{ for: 'title' } Title:
+    %input.form-control{ type: 'text', name: 'title', placeholder: 'Name of Petition' }
+
+  .form-group
+    %label{ for: 'creator_email' } Your Email:
+    %input.form-control{ type: 'email', name: 'creator_email', placeholder: 'susie@example.com' }
+
+  .form-group
+    %label{ for: 'whitehouse_url' } We The People URL:
+    %input.form-control{ type: 'text', name: 'whitehouse_url', placeholder: 'https://petitions.whitehouse.gov/petition/name-of-petition/id' }
+
+  .form-group
+    %label{ for: 'change_url' } Change.org URL:
+    %input.form-control{ type: 'text', name: 'change_url', placeholder: 'http://www.change.org/petitions/name-of-petition' }
+
+  .form-group
+    %label{ for: 'causes_url' } Causes.com URL:
+    %input.form-control{ type: 'text', name: 'causes_url', placeholder: 'https://www.causes.com/actions/id-name-of-petition' }
+
+  .form-group
+    %input.form-control.btn.btn-default{ type: 'submit', value: 'Create Petition' }

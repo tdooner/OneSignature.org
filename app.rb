@@ -45,3 +45,18 @@ get '/petitions/:id' do
   petition = Petition.find(params[:id])
   haml :petition, locals: { petition: petition }
 end
+
+get '/new' do
+  haml :new
+end
+
+post '/new' do
+  params.symbolize_keys!
+
+  p = Petition.create(params.slice(:creator_email, :title)) # TODO: remove title?
+  ConnectedPetition::Causes.create(petition_id: p.id, url: params[:causes_url])
+  ConnectedPetition::Change.create(petition_id: p.id, url: params[:change_url])
+  ConnectedPetition::WeThePeople.create(petition_id: p.id, url: params[:whitehouse_url])
+
+  redirect '/'
+end

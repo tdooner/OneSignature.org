@@ -6,6 +6,7 @@ gem 'haml'
 gem 'rake'
 gem 'omniauth'
 gem 'omniauth-oauth2'
+gem 'nokogiri'
 
 group :development do
   gem 'sqlite3'
