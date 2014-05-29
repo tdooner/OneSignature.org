@@ -1,13 +1,10 @@
 source 'https://rubygems.org'
 
-# Gem versions are pegged because they are the versions I have installed
-# locally (airplane mode)
-
-gem 'sinatra', '1.4.4'
-gem 'activerecord', '4.0.2'
-gem 'haml', '4.0.5'
-gem 'rake', '10.1.1'
+gem 'sinatra'
+gem 'activerecord'
+gem 'haml'
+gem 'rake'
 
 group :development do
-  gem 'sqlite3', '1.3.9'
+  gem 'sqlite3'
 end
