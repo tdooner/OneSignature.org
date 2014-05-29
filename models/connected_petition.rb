@@ -20,6 +20,7 @@ class ConnectedPetition::Causes < ConnectedPetition
     photo = doc.css('meta[property="og:image"]').first['content']
     self.petition.photos << Photo.new(url: photo) if photo
 
+    self.external_id = url.match(/\d+/).to_s
     self.title = doc.css('.campaign-title a').text
     self.target = doc.css('.action-target').text
     self.description =
@@ -41,6 +42,7 @@ class ConnectedPetition::Change < ConnectedPetition
     p = JSON.parse(open(api_uri).read)
     self.petition.photos << Photo.new(url: p["image_url"])
 
+    self.external_id = petition_id
     self.title = p["title"]
     self.target = p["targets"].first["name"]
     self.description = Nokogiri::HTML.parse(p["overview"]).text
@@ -55,6 +57,7 @@ class ConnectedPetition::WeThePeople < ConnectedPetition
 
     petition = JSON.parse(open(api_uri).read)["results"].first
 
+    self.external_id = petition["id"]
     self.title = petition["title"]
     self.target = "the Obama Administration"
     self.description = petition["body"]

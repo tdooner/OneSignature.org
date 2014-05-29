@@ -13,6 +13,7 @@ ActiveRecord::Schema.define do
   create_table :connected_petitions do |t|
     t.integer :petition_id, null: false
     t.string :type, null: false
+    t.string :external_id
     t.string :url, null: false
     t.string :title
     t.string :target
