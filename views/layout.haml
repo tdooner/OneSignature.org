@@ -81,19 +81,19 @@
 
       /* petition show page */
       .petition-header-full-bleed {
-        min-height: 400px;
+        overflow: auto; /* clearfix */
         background-size: cover;
         background-position: center center;
-        position: relative;
+        margin-bottom: 2em;
       }
 
       .petition-header-title {
-        position: absolute;
-        bottom: 1em;
+        margin: 280px 0 1em;
       }
 
       .petition-header-title h1 {
         background-color: #000;
+        display: inline-block;
         padding: 7px 15px;
         line-height: 1.2em;
         color: #FFF;
@@ -121,13 +121,15 @@
             = yield
 
     - if defined? petition
-      .petition-header-full-bleed{ style: "background-image: url(#{petition.cover_photo.url});" }
+      - photo = petition.cover_photo.url if petition.cover_photo
+      .petition-header-full-bleed{ style: "background-image: url(#{photo});" }
         .header-container-full-bleed
           = header
-        .container
-          .row.petition-header-title
-            .col-sm-10.col-sm-offset-2
-              %h1= petition.title
+        .petition-header-title
+          .container
+            .row
+              .col-sm-8.col-sm-offset-2.col-xs-12
+                %h1= petition.title
       = body
     - else
       = header
