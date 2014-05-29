@@ -1,0 +1,14 @@
+%form{ method: 'POST', role: 'form'}
+  .form-group
+    %label{ for: 'info_email' } Email
+    %input.form-control{ id: 'info_email', name: 'info[email]', value: session[:email] }
+
+  .form-group
+    %label{ for: 'info_first_name' } First Name
+    %input.form-control{ id: 'info_first_name', name: 'info[first_name]', value: session[:first_name] }
+
+  .form-group
+    %label{ for: 'info_last_name' } Last Name
+    %input.form-control{ id: 'info_last_name', name: 'info[last_name]' , value: session[:last_name] }
+
+  %button.btn.btn-primary{ type: :submit} Sign
